@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/bloc/app_bloc.dart';
 
-class DailyForecastTab extends StatelessWidget {
-  const DailyForecastTab({Key? key}) : super(key: key);
+class CurrentForecastTab extends StatelessWidget {
+  const CurrentForecastTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
