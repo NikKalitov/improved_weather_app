@@ -10,7 +10,10 @@ class CurrentForecastTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
-        return Container();
+        return Scaffold(
+          backgroundColor: Colors.grey.shade400,
+          body: Container(),
+        );
       },
     );
   }

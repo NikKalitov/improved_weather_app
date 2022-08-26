@@ -19,32 +19,44 @@ mixin _$AppEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() refreshData,
+    required TResult Function() locationChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Loading value) started,
+    required TResult Function(_RefreshData value) refreshData,
+    required TResult Function(_LocationChange value) locationChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,26 +78,26 @@ class _$AppEventCopyWithImpl<$Res> implements $AppEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_StartedCopyWith<$Res> {
-  factory _$$_StartedCopyWith(
-          _$_Started value, $Res Function(_$_Started) then) =
-      __$$_StartedCopyWithImpl<$Res>;
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StartedCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
-    implements _$$_StartedCopyWith<$Res> {
-  __$$_StartedCopyWithImpl(_$_Started _value, $Res Function(_$_Started) _then)
-      : super(_value, (v) => _then(v as _$_Started));
+class __$$_LoadingCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, (v) => _then(v as _$_Loading));
 
   @override
-  _$_Started get _value => super._value as _$_Started;
+  _$_Loading get _value => super._value as _$_Loading;
 }
 
 /// @nodoc
 
-class _$_Started implements _Started {
-  const _$_Started();
+class _$_Loading implements _Loading {
+  const _$_Loading();
 
   @override
   String toString() {
@@ -95,7 +107,7 @@ class _$_Started implements _Started {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Started);
+        (other.runtimeType == runtimeType && other is _$_Loading);
   }
 
   @override
@@ -105,6 +117,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function() refreshData,
+    required TResult Function() locationChange,
   }) {
     return started();
   }
@@ -113,6 +127,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
   }) {
     return started?.call();
   }
@@ -121,6 +137,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -132,7 +150,9 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_Loading value) started,
+    required TResult Function(_RefreshData value) refreshData,
+    required TResult Function(_LocationChange value) locationChange,
   }) {
     return started(this);
   }
@@ -140,7 +160,9 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
   }) {
     return started?.call(this);
   }
@@ -148,7 +170,9 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -158,17 +182,255 @@ class _$_Started implements _Started {
   }
 }
 
-abstract class _Started implements AppEvent {
-  const factory _Started() = _$_Started;
+abstract class _Loading implements AppEvent {
+  const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
-mixin _$AppState {}
+abstract class _$$_RefreshDataCopyWith<$Res> {
+  factory _$$_RefreshDataCopyWith(
+          _$_RefreshData value, $Res Function(_$_RefreshData) then) =
+      __$$_RefreshDataCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RefreshDataCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
+    implements _$$_RefreshDataCopyWith<$Res> {
+  __$$_RefreshDataCopyWithImpl(
+      _$_RefreshData _value, $Res Function(_$_RefreshData) _then)
+      : super(_value, (v) => _then(v as _$_RefreshData));
+
+  @override
+  _$_RefreshData get _value => super._value as _$_RefreshData;
+}
+
+/// @nodoc
+
+class _$_RefreshData implements _RefreshData {
+  const _$_RefreshData();
+
+  @override
+  String toString() {
+    return 'AppEvent.refreshData()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RefreshData);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() refreshData,
+    required TResult Function() locationChange,
+  }) {
+    return refreshData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
+  }) {
+    return refreshData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
+    required TResult orElse(),
+  }) {
+    if (refreshData != null) {
+      return refreshData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) started,
+    required TResult Function(_RefreshData value) refreshData,
+    required TResult Function(_LocationChange value) locationChange,
+  }) {
+    return refreshData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
+  }) {
+    return refreshData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
+    required TResult orElse(),
+  }) {
+    if (refreshData != null) {
+      return refreshData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshData implements AppEvent {
+  const factory _RefreshData() = _$_RefreshData;
+}
+
+/// @nodoc
+abstract class _$$_LocationChangeCopyWith<$Res> {
+  factory _$$_LocationChangeCopyWith(
+          _$_LocationChange value, $Res Function(_$_LocationChange) then) =
+      __$$_LocationChangeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LocationChangeCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
+    implements _$$_LocationChangeCopyWith<$Res> {
+  __$$_LocationChangeCopyWithImpl(
+      _$_LocationChange _value, $Res Function(_$_LocationChange) _then)
+      : super(_value, (v) => _then(v as _$_LocationChange));
+
+  @override
+  _$_LocationChange get _value => super._value as _$_LocationChange;
+}
+
+/// @nodoc
+
+class _$_LocationChange implements _LocationChange {
+  const _$_LocationChange();
+
+  @override
+  String toString() {
+    return 'AppEvent.locationChange()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_LocationChange);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() refreshData,
+    required TResult Function() locationChange,
+  }) {
+    return locationChange();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
+  }) {
+    return locationChange?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? refreshData,
+    TResult Function()? locationChange,
+    required TResult orElse(),
+  }) {
+    if (locationChange != null) {
+      return locationChange();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) started,
+    required TResult Function(_RefreshData value) refreshData,
+    required TResult Function(_LocationChange value) locationChange,
+  }) {
+    return locationChange(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
+  }) {
+    return locationChange?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? started,
+    TResult Function(_RefreshData value)? refreshData,
+    TResult Function(_LocationChange value)? locationChange,
+    required TResult orElse(),
+  }) {
+    if (locationChange != null) {
+      return locationChange(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LocationChange implements AppEvent {
+  const factory _LocationChange() = _$_LocationChange;
+}
+
+/// @nodoc
+mixin _$AppState {
+  AppStatus? get appStatus => throw _privateConstructorUsedError;
+  ConnectionStatus? get connectionStatus => throw _privateConstructorUsedError;
+  CurrentForecast? get currentForecast => throw _privateConstructorUsedError;
+  Location? get location => throw _privateConstructorUsedError;
+  String? get forecastJson => throw _privateConstructorUsedError;
+  String? get locationJson => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AppStateCopyWith<AppState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res>;
+  $Res call(
+      {AppStatus? appStatus,
+      ConnectionStatus? connectionStatus,
+      CurrentForecast? currentForecast,
+      Location? location,
+      String? forecastJson,
+      String? locationJson});
 }
 
 /// @nodoc
@@ -178,13 +440,58 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   final AppState _value;
   // ignore: unused_field
   final $Res Function(AppState) _then;
+
+  @override
+  $Res call({
+    Object? appStatus = freezed,
+    Object? connectionStatus = freezed,
+    Object? currentForecast = freezed,
+    Object? location = freezed,
+    Object? forecastJson = freezed,
+    Object? locationJson = freezed,
+  }) {
+    return _then(_value.copyWith(
+      appStatus: appStatus == freezed
+          ? _value.appStatus
+          : appStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus?,
+      connectionStatus: connectionStatus == freezed
+          ? _value.connectionStatus
+          : connectionStatus // ignore: cast_nullable_to_non_nullable
+              as ConnectionStatus?,
+      currentForecast: currentForecast == freezed
+          ? _value.currentForecast
+          : currentForecast // ignore: cast_nullable_to_non_nullable
+              as CurrentForecast?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Location?,
+      forecastJson: forecastJson == freezed
+          ? _value.forecastJson
+          : forecastJson // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationJson: locationJson == freezed
+          ? _value.locationJson
+          : locationJson // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$$_AppStateCopyWith<$Res> {
+abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   factory _$$_AppStateCopyWith(
           _$_AppState value, $Res Function(_$_AppState) then) =
       __$$_AppStateCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {AppStatus? appStatus,
+      ConnectionStatus? connectionStatus,
+      CurrentForecast? currentForecast,
+      Location? location,
+      String? forecastJson,
+      String? locationJson});
 }
 
 /// @nodoc
@@ -196,28 +503,130 @@ class __$$_AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
 
   @override
   _$_AppState get _value => super._value as _$_AppState;
+
+  @override
+  $Res call({
+    Object? appStatus = freezed,
+    Object? connectionStatus = freezed,
+    Object? currentForecast = freezed,
+    Object? location = freezed,
+    Object? forecastJson = freezed,
+    Object? locationJson = freezed,
+  }) {
+    return _then(_$_AppState(
+      appStatus: appStatus == freezed
+          ? _value.appStatus
+          : appStatus // ignore: cast_nullable_to_non_nullable
+              as AppStatus?,
+      connectionStatus: connectionStatus == freezed
+          ? _value.connectionStatus
+          : connectionStatus // ignore: cast_nullable_to_non_nullable
+              as ConnectionStatus?,
+      currentForecast: currentForecast == freezed
+          ? _value.currentForecast
+          : currentForecast // ignore: cast_nullable_to_non_nullable
+              as CurrentForecast?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Location?,
+      forecastJson: forecastJson == freezed
+          ? _value.forecastJson
+          : forecastJson // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationJson: locationJson == freezed
+          ? _value.locationJson
+          : locationJson // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_AppState implements _AppState {
-  const _$_AppState();
+  _$_AppState(
+      {this.appStatus,
+      this.connectionStatus,
+      this.currentForecast,
+      this.location,
+      this.forecastJson,
+      this.locationJson});
+
+  @override
+  final AppStatus? appStatus;
+  @override
+  final ConnectionStatus? connectionStatus;
+  @override
+  final CurrentForecast? currentForecast;
+  @override
+  final Location? location;
+  @override
+  final String? forecastJson;
+  @override
+  final String? locationJson;
 
   @override
   String toString() {
-    return 'AppState()';
+    return 'AppState(appStatus: $appStatus, connectionStatus: $connectionStatus, currentForecast: $currentForecast, location: $location, forecastJson: $forecastJson, locationJson: $locationJson)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AppState);
+        (other.runtimeType == runtimeType &&
+            other is _$_AppState &&
+            const DeepCollectionEquality().equals(other.appStatus, appStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.connectionStatus, connectionStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.currentForecast, currentForecast) &&
+            const DeepCollectionEquality().equals(other.location, location) &&
+            const DeepCollectionEquality()
+                .equals(other.forecastJson, forecastJson) &&
+            const DeepCollectionEquality()
+                .equals(other.locationJson, locationJson));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(appStatus),
+      const DeepCollectionEquality().hash(connectionStatus),
+      const DeepCollectionEquality().hash(currentForecast),
+      const DeepCollectionEquality().hash(location),
+      const DeepCollectionEquality().hash(forecastJson),
+      const DeepCollectionEquality().hash(locationJson));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
+      __$$_AppStateCopyWithImpl<_$_AppState>(this, _$identity);
 }
 
 abstract class _AppState implements AppState {
-  const factory _AppState() = _$_AppState;
+  factory _AppState(
+      {final AppStatus? appStatus,
+      final ConnectionStatus? connectionStatus,
+      final CurrentForecast? currentForecast,
+      final Location? location,
+      final String? forecastJson,
+      final String? locationJson}) = _$_AppState;
+
+  @override
+  AppStatus? get appStatus;
+  @override
+  ConnectionStatus? get connectionStatus;
+  @override
+  CurrentForecast? get currentForecast;
+  @override
+  Location? get location;
+  @override
+  String? get forecastJson;
+  @override
+  String? get locationJson;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AppStateCopyWith<_$_AppState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

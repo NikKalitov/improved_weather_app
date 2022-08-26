@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:inproved_weather_app/interface/pages/tab_page.dart';
+import './interface/pages/tab_page.dart';
+import './interface/pages/test_page.dart';
 
 import 'logic/bloc/app_bloc.dart';
 
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AppBloc(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: TabPage(),
+        // home: TestPage(),
       ),
     );
   }
@@ -29,4 +32,8 @@ class MyApp extends StatelessWidget {
 ///54.308298
 ///48.382344
 ///b4e733eb5cecdff62ac9d5ee88c8830f
+
+
+///http://api.openweathermap.org/geo/1.0/direct?q=$location&limit=1&appid=b4e733eb5cecdff62ac9d5ee88c8830f
+///http://api.openweathermap.org/geo/1.0/direct?q=$Ульяновск&limit=1&appid=b4e733eb5cecdff62ac9d5ee88c8830f
 
