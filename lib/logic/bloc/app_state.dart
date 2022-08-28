@@ -1,6 +1,7 @@
 part of 'app_bloc.dart';
 
 enum AppStatus {
+  initializing,
   loading,
   loaded,
 }
@@ -20,5 +21,6 @@ class AppState with _$AppState {
     Location? location,
     String? forecastJson,
     String? locationJson,
+    bool? hasError,
   }) = _AppState;
 }

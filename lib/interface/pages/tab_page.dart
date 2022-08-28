@@ -31,8 +31,8 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
         appBar: AppBar(
           backgroundColor: Colors.blueGrey,
           title: const Text('Погода'),
-          leading: RefreshButton(),
-          actions: [CitySelectionButton()],
+          leading: const RefreshButton(),
+          actions: const [CitySelectionButton()],
           centerTitle: true,
           bottom: TabBar(
             controller: _controller,

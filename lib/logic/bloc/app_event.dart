@@ -4,5 +4,6 @@ part of 'app_bloc.dart';
 class AppEvent with _$AppEvent {
   const factory AppEvent.started() = _Loading;
   const factory AppEvent.refreshData() = _RefreshData;
-  const factory AppEvent.locationChange() = _LocationChange;
+  const factory AppEvent.locationChange({required String newLocation}) =
+      _LocationChange;
 }

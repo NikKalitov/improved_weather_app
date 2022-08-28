@@ -20,21 +20,21 @@ mixin _$AppEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() refreshData,
-    required TResult Function() locationChange,
+    required TResult Function(String newLocation) locationChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +118,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() refreshData,
-    required TResult Function() locationChange,
+    required TResult Function(String newLocation) locationChange,
   }) {
     return started();
   }
@@ -128,7 +128,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
   }) {
     return started?.call();
   }
@@ -138,7 +138,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -228,7 +228,7 @@ class _$_RefreshData implements _RefreshData {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() refreshData,
-    required TResult Function() locationChange,
+    required TResult Function(String newLocation) locationChange,
   }) {
     return refreshData();
   }
@@ -238,7 +238,7 @@ class _$_RefreshData implements _RefreshData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
   }) {
     return refreshData?.call();
   }
@@ -248,7 +248,7 @@ class _$_RefreshData implements _RefreshData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
     required TResult orElse(),
   }) {
     if (refreshData != null) {
@@ -301,6 +301,7 @@ abstract class _$$_LocationChangeCopyWith<$Res> {
   factory _$$_LocationChangeCopyWith(
           _$_LocationChange value, $Res Function(_$_LocationChange) then) =
       __$$_LocationChangeCopyWithImpl<$Res>;
+  $Res call({String newLocation});
 }
 
 /// @nodoc
@@ -312,35 +313,59 @@ class __$$_LocationChangeCopyWithImpl<$Res> extends _$AppEventCopyWithImpl<$Res>
 
   @override
   _$_LocationChange get _value => super._value as _$_LocationChange;
+
+  @override
+  $Res call({
+    Object? newLocation = freezed,
+  }) {
+    return _then(_$_LocationChange(
+      newLocation: newLocation == freezed
+          ? _value.newLocation
+          : newLocation // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LocationChange implements _LocationChange {
-  const _$_LocationChange();
+  const _$_LocationChange({required this.newLocation});
+
+  @override
+  final String newLocation;
 
   @override
   String toString() {
-    return 'AppEvent.locationChange()';
+    return 'AppEvent.locationChange(newLocation: $newLocation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LocationChange);
+        (other.runtimeType == runtimeType &&
+            other is _$_LocationChange &&
+            const DeepCollectionEquality()
+                .equals(other.newLocation, newLocation));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(newLocation));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LocationChangeCopyWith<_$_LocationChange> get copyWith =>
+      __$$_LocationChangeCopyWithImpl<_$_LocationChange>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() refreshData,
-    required TResult Function() locationChange,
+    required TResult Function(String newLocation) locationChange,
   }) {
-    return locationChange();
+    return locationChange(newLocation);
   }
 
   @override
@@ -348,9 +373,9 @@ class _$_LocationChange implements _LocationChange {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
   }) {
-    return locationChange?.call();
+    return locationChange?.call(newLocation);
   }
 
   @override
@@ -358,11 +383,11 @@ class _$_LocationChange implements _LocationChange {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? refreshData,
-    TResult Function()? locationChange,
+    TResult Function(String newLocation)? locationChange,
     required TResult orElse(),
   }) {
     if (locationChange != null) {
-      return locationChange();
+      return locationChange(newLocation);
     }
     return orElse();
   }
@@ -403,7 +428,13 @@ class _$_LocationChange implements _LocationChange {
 }
 
 abstract class _LocationChange implements AppEvent {
-  const factory _LocationChange() = _$_LocationChange;
+  const factory _LocationChange({required final String newLocation}) =
+      _$_LocationChange;
+
+  String get newLocation;
+  @JsonKey(ignore: true)
+  _$$_LocationChangeCopyWith<_$_LocationChange> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -414,6 +445,7 @@ mixin _$AppState {
   Location? get location => throw _privateConstructorUsedError;
   String? get forecastJson => throw _privateConstructorUsedError;
   String? get locationJson => throw _privateConstructorUsedError;
+  bool? get hasError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -430,7 +462,8 @@ abstract class $AppStateCopyWith<$Res> {
       CurrentForecast? currentForecast,
       Location? location,
       String? forecastJson,
-      String? locationJson});
+      String? locationJson,
+      bool? hasError});
 }
 
 /// @nodoc
@@ -449,6 +482,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? location = freezed,
     Object? forecastJson = freezed,
     Object? locationJson = freezed,
+    Object? hasError = freezed,
   }) {
     return _then(_value.copyWith(
       appStatus: appStatus == freezed
@@ -475,6 +509,10 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.locationJson
           : locationJson // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -491,7 +529,8 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       CurrentForecast? currentForecast,
       Location? location,
       String? forecastJson,
-      String? locationJson});
+      String? locationJson,
+      bool? hasError});
 }
 
 /// @nodoc
@@ -512,6 +551,7 @@ class __$$_AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
     Object? location = freezed,
     Object? forecastJson = freezed,
     Object? locationJson = freezed,
+    Object? hasError = freezed,
   }) {
     return _then(_$_AppState(
       appStatus: appStatus == freezed
@@ -538,6 +578,10 @@ class __$$_AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.locationJson
           : locationJson // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasError: hasError == freezed
+          ? _value.hasError
+          : hasError // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -551,7 +595,8 @@ class _$_AppState implements _AppState {
       this.currentForecast,
       this.location,
       this.forecastJson,
-      this.locationJson});
+      this.locationJson,
+      this.hasError});
 
   @override
   final AppStatus? appStatus;
@@ -565,10 +610,12 @@ class _$_AppState implements _AppState {
   final String? forecastJson;
   @override
   final String? locationJson;
+  @override
+  final bool? hasError;
 
   @override
   String toString() {
-    return 'AppState(appStatus: $appStatus, connectionStatus: $connectionStatus, currentForecast: $currentForecast, location: $location, forecastJson: $forecastJson, locationJson: $locationJson)';
+    return 'AppState(appStatus: $appStatus, connectionStatus: $connectionStatus, currentForecast: $currentForecast, location: $location, forecastJson: $forecastJson, locationJson: $locationJson, hasError: $hasError)';
   }
 
   @override
@@ -585,7 +632,8 @@ class _$_AppState implements _AppState {
             const DeepCollectionEquality()
                 .equals(other.forecastJson, forecastJson) &&
             const DeepCollectionEquality()
-                .equals(other.locationJson, locationJson));
+                .equals(other.locationJson, locationJson) &&
+            const DeepCollectionEquality().equals(other.hasError, hasError));
   }
 
   @override
@@ -596,7 +644,8 @@ class _$_AppState implements _AppState {
       const DeepCollectionEquality().hash(currentForecast),
       const DeepCollectionEquality().hash(location),
       const DeepCollectionEquality().hash(forecastJson),
-      const DeepCollectionEquality().hash(locationJson));
+      const DeepCollectionEquality().hash(locationJson),
+      const DeepCollectionEquality().hash(hasError));
 
   @JsonKey(ignore: true)
   @override
@@ -611,7 +660,8 @@ abstract class _AppState implements AppState {
       final CurrentForecast? currentForecast,
       final Location? location,
       final String? forecastJson,
-      final String? locationJson}) = _$_AppState;
+      final String? locationJson,
+      final bool? hasError}) = _$_AppState;
 
   @override
   AppStatus? get appStatus;
@@ -625,6 +675,8 @@ abstract class _AppState implements AppState {
   String? get forecastJson;
   @override
   String? get locationJson;
+  @override
+  bool? get hasError;
   @override
   @JsonKey(ignore: true)
   _$$_AppStateCopyWith<_$_AppState> get copyWith =>

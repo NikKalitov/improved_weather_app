@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../data/api/api_client.dart';
 import '../../data/models/location.dart';
-import '../../data/models/daily_forecast.dart';
 import '../../data/models/current_forecast.dart';
 import '../../data/storage/storage_provider.dart';
 
@@ -15,19 +14,22 @@ part 'app_bloc.freezed.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc()
       : super(_AppState(
-          appStatus: AppStatus.loading,
+          appStatus: AppStatus.initializing,
           connectionStatus: ConnectionStatus.unknown,
           currentForecast: CurrentForecast(),
           forecastJson: '',
           location: Location(),
           locationJson: '',
+          hasError: false,
         )) {
     on<_Loading>(_onLoading);
+    on<_RefreshData>(_onRefreshData);
+    on<_LocationChange>(_onLocationChange);
   }
 
   Future<void> _onLoading(_Loading event, Emitter<AppState> emit) async {
-    //всё ниже происходит только в случае, когда AppStatus == loading
-    if (state.appStatus == AppStatus.loading) {
+    //всё ниже происходит только в случае, когда AppStatus == initializing
+    if (state.appStatus == AppStatus.initializing) {
       bool hasConnection = await ApiClient.checkConnectivity();
       late ConnectionStatus connectionStatus;
       late String locationJson;
@@ -76,6 +78,98 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         location: location,
         forecastJson: forecastJson,
         locationJson: locationJson,
+      ));
+    }
+  }
+
+  Future<void> _onRefreshData(
+      _RefreshData event, Emitter<AppState> emit) async {
+    //сообщаем, что приложение грузится
+    emit(state.copyWith(appStatus: AppStatus.loading));
+    //проверяем, есть ли подключение
+    bool hasConnection = await ApiClient.checkConnectivity();
+    if (hasConnection) {
+      //если есть, те же действия, что и при загрузки
+      ConnectionStatus connectionStatus = ConnectionStatus.online;
+      //из памяти берем json с локацией
+      String locationJson = await SharedPrefProvider.getLocation();
+      //получаем ключ для запроса прогноза
+      String key = await SharedPrefProvider.getKey();
+      //получаем объект location, используя json из памяти
+      Location location = Location.fromJsonOnResponse(jsonDecode(locationJson));
+      //используя location и ключ, получаем json прогноза погоды
+      String forecastJson =
+          await ApiClient.getCurrentForecast(location.lat!, location.lon!, key);
+      //перезаписываем данные в память
+      await rewriteSharedPref(locationJson, forecastJson, key);
+      //создаем объект прогноза погоды из json
+      CurrentForecast currentForecast =
+          CurrentForecast.fromJsonOnResponse(jsonDecode(forecastJson));
+      //приложение загрузилось
+      AppStatus appStatus = AppStatus.loaded;
+      bool hasError = false;
+      emit(state.copyWith(
+        appStatus: appStatus,
+        connectionStatus: connectionStatus,
+        currentForecast: currentForecast,
+        forecastJson: forecastJson,
+        location: location,
+        locationJson: locationJson,
+        //ошибки не произошло
+        hasError: hasError,
+      ));
+    } else if (!hasConnection) {
+      //если нет подключения, то оставляем данные без изменений, но сообщаем,
+      //что произошла ошибка
+      emit(state.copyWith(
+        appStatus: AppStatus.loaded,
+        hasError: true,
+      ));
+    }
+  }
+
+  Future<void> _onLocationChange(
+      _LocationChange event, Emitter<AppState> emit) async {
+    //сообщаем, что приложение грузится
+    emit(state.copyWith(appStatus: AppStatus.loading));
+    //проверяем, есть ли подключение
+    bool hasConnection = await ApiClient.checkConnectivity();
+    if (hasConnection) {
+      //статус приложения онлайн
+      ConnectionStatus connectionStatus = ConnectionStatus.online;
+      //запрашиваем данные по локации, основываясь на введенных в поле данных
+      String locationJson = await ApiClient.getLocation(event.newLocation);
+      //получаем ключ для запроса прогноза
+      String key = await SharedPrefProvider.getKey();
+      //получаем объект location, используя json из памяти
+      Location location = Location.fromJsonOnResponse(jsonDecode(locationJson));
+      //используя location и ключ, получаем json прогноза погоды
+      String forecastJson =
+          await ApiClient.getCurrentForecast(location.lat!, location.lon!, key);
+      //перезаписываем данные в память
+      await rewriteSharedPref(locationJson, forecastJson, key);
+      //создаем объект прогноза погоды из json
+      CurrentForecast currentForecast =
+          CurrentForecast.fromJsonOnResponse(jsonDecode(forecastJson));
+      //приложение загрузилось
+      AppStatus appStatus = AppStatus.loaded;
+      bool hasError = false;
+      emit(state.copyWith(
+        appStatus: appStatus,
+        connectionStatus: connectionStatus,
+        currentForecast: currentForecast,
+        forecastJson: forecastJson,
+        location: location,
+        locationJson: locationJson,
+        //ошибки не произошло
+        hasError: hasError,
+      ));
+    } else if (!hasConnection) {
+      //если нет подключения, то оставляем данные без изменений, но сообщаем,
+      //что произошла ошибка
+      emit(state.copyWith(
+        appStatus: AppStatus.loaded,
+        hasError: true,
       ));
     }
   }

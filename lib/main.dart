@@ -4,9 +4,10 @@ import './interface/pages/tab_page.dart';
 import './interface/pages/test_page.dart';
 
 import 'logic/bloc/app_bloc.dart';
+import 'logic/cubit/request_cubit.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +15,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppBloc(),
-      child: MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppBloc(),
+        ),
+        BlocProvider(
+          create: (context) => RequestCubit(),
+        ),
+      ],
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: TabPage(),
         // home: TestPage(),
