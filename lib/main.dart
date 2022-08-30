@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import './interface/pages/tab_page.dart';
 import './interface/pages/test_page.dart';
 
-import 'logic/bloc/app_bloc.dart';
-import 'logic/cubit/request_cubit.dart';
+import './logic/bloc/app_bloc.dart';
+import '../../logic/cubit/request_cubit/request_cubit.dart';
+import 'logic/cubit/current_forecast/current_forecast_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => RequestCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CurrentForecastCubit(),
         ),
       ],
       child: const MaterialApp(

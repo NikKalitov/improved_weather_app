@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../../logic/providers/image_provider.dart';
 import '../../data/models/current_forecast.dart';
 import '../../data/api/api_client.dart';
 
@@ -18,7 +19,7 @@ class TestPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            String location = 'Уновск';
+            String location = 'Ульяновск';
             String response = await ApiClient.getLocation(location);
             // var response = await http.get(Uri.parse(
             //     // 'http://api.openweathermap.org/geo/1.0/direct?q=$location&limit=1&appid=b4e733eb5cecdff62ac9d5ee88c8830f'));
@@ -30,7 +31,8 @@ class TestPage extends StatelessWidget {
             //     CurrentForecast.fromJsonOnResponse(jsonDecode(forecastJson));
             // print(forecast.listOfForecasts![0].humidity);
           },
-          child: Text('Test'),
+          // child: Text('Test'),
+          child: Image.asset(ImageController.returnImagePath('01n')),
         ),
       ),
     );

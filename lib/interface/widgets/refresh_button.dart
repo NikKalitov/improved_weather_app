@@ -12,6 +12,7 @@ class RefreshButton extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           onPressed: () {
+            //кнопка вызывает event обновления прогноза погоды
             context.read<AppBloc>().add(const AppEvent.refreshData());
           },
           icon: const Icon(Icons.refresh),

@@ -7,6 +7,7 @@ class CitySelectionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //кнопка вызывает диалоговое окно с выбором города
     return IconButton(
       onPressed: () {
         showDialog(
