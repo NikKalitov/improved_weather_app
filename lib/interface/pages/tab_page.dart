@@ -30,6 +30,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
         return DefaultTabController(
           length: 2,
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.grey.shade400,
             appBar: AppBar(
               backgroundColor: Colors.blueGrey,

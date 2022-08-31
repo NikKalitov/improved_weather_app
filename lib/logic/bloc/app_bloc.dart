@@ -38,6 +38,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       late String forecastJson;
       late CurrentForecast currentForecast;
       late AppStatus appStatus;
+      late bool hasError;
       if (hasConnection) {
         //ставим онлайн статус
         connectionStatus = ConnectionStatus.online;
@@ -57,6 +58,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             CurrentForecast.fromJsonOnResponse(jsonDecode(forecastJson));
         //приложение загрузилось
         appStatus = AppStatus.loaded;
+        //ошибка, что нет подключения
+        hasError = false;
       } else if (!hasConnection) {
         //ставим статус offline
         connectionStatus = ConnectionStatus.offline;
@@ -69,6 +72,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         location = Location.fromJsonOnResponse(jsonDecode(locationJson));
         //приложение загрузилось
         appStatus = AppStatus.loaded;
+        //ошибка, что нет подключения
+        hasError = true;
       }
       //вызываем state с новыми параметрами
       emit(state.copyWith(
@@ -78,6 +83,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         location: location,
         forecastJson: forecastJson,
         locationJson: locationJson,
+        hasError: hasError,
       ));
     }
   }

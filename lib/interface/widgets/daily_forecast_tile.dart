@@ -77,7 +77,7 @@ class DailyForecastListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${dailyForecast.dayTemp}°C / ${dailyForecast.dayTemp}°C',
+                  '${dailyForecast.dayTemp}°C / ${dailyForecast.nightTemp}°C',
                   style: rightColumn,
                 ),
                 const SizedBox(
@@ -115,38 +115,7 @@ class DailyForecastListItem extends StatelessWidget {
         const SizedBox(
           height: 15.0,
         ),
-        //Divider(thickness: 2.0, color: Colors.white,)
       ],
     );
-
-    // return Center(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Container(
-    //         decoration: BoxDecoration(
-    //           border: Border.all(color: Colors.black),
-    //         ),
-    //         child: Row(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //           children: [
-    //             Text(
-    //               '${timeClass.weekday}, ${timeClass.day} ${timeClass.month} ${timeClass.year} год',
-    //               style: dateStyle,
-    //             ),
-    //             Padding(
-    //               padding: const EdgeInsets.only(top: 8.0),
-    //               child: CustomIcon(
-    //                 iconId: dailyForecast.iconId!,
-    //                 scale: 1.5,
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

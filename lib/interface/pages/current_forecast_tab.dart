@@ -17,6 +17,7 @@ class CurrentForecastTab extends StatelessWidget {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, blocState) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.grey.shade400,
           body: Center(
             //кубит для вкладки с текущим прогнозом
@@ -31,6 +32,11 @@ class CurrentForecastTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      //если нет подключения, выводим текст
+                      if (blocState.hasError!)
+                        const Text(
+                          'Нед подключения к сети',
+                        ),
                       //виджет показывает данные о местонахождении
                       CurrentLocationWidget(
                         cityName: blocState.location!.locationName!,
