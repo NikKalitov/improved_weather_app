@@ -8,27 +8,16 @@ part 'current_forecast_cubit.freezed.dart';
 
 class CurrentForecastCubit extends Cubit<CurrentForecastState> {
   CurrentForecastCubit()
-      : super(CurrentForecastState.initial(
+      : super(const CurrentForecastState.initial(
           isLoading: true,
-          timeClass: TimeClass(
-            day: '',
-            hour: '',
-            minutes: '',
-            month: '',
-            year: '',
-          ),
-          timeStamp: 0,
         ));
 
   void getTimeClass(int timeStamp) {
     TimeClass timeClass = TimeConverter.getDate(timeStamp);
-    // print(timeClass.day);
-    emit(CurrentForecastState.initial(
+    emit(state.copyWith(
       isLoading: false,
       timeClass: timeClass,
       timeStamp: timeStamp,
     ));
-    print(state.timeClass!.day);
-    // return timeClass;
   }
 }

@@ -24,46 +24,48 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade400,
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          title: const Text('Погода'),
-          leading: const RefreshButton(),
-          actions: const [CitySelectionButton()],
-          centerTitle: true,
-          bottom: TabBar(
-            controller: _controller,
-            indicatorColor: Colors.white,
-            tabs: const [
-              Tab(
-                icon: Icon(Icons.cloud),
+    return BlocBuilder<AppBloc, AppState>(
+      builder: (context, state) {
+        context.read<AppBloc>().add(const AppEvent.started());
+        return DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            backgroundColor: Colors.grey.shade400,
+            appBar: AppBar(
+              backgroundColor: Colors.blueGrey,
+              title: const Text('Погода'),
+              leading: const RefreshButton(),
+              actions: const [CitySelectionButton()],
+              centerTitle: true,
+              bottom: TabBar(
+                controller: _controller,
+                indicatorColor: Colors.white,
+                tabs: const [
+                  Tab(
+                    icon: Icon(Icons.cloud),
+                  ),
+                  Tab(
+                    icon: Icon(Icons.list),
+                  ),
+                ],
               ),
-              Tab(
-                icon: Icon(Icons.list),
-              ),
-            ],
-          ),
-        ),
-        body: BlocBuilder<AppBloc, AppState>(
-          builder: (context, state) {
-            context.read<AppBloc>().add(const AppEvent.started());
-            return state.appStatus == AppStatus.loaded
+            ),
+            body: state.appStatus == AppStatus.loaded
+                //если приложение загружено, отображаем две вкладки
                 ? TabBarView(
                     controller: _controller,
-                    children: [
+                    children: const [
                       CurrentForecastTab(),
                       DailyForecastTab(),
                     ],
                   )
+                //иначе пишем, что загружается
                 : const Center(
                     child: Text('Загрузка...'),
-                  );
-          },
-        ),
-      ),
+                  ),
+          ),
+        );
+      },
     );
   }
 }

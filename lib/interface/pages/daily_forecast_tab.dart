@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/daily_forecast_tile.dart';
+import '../../logic/converters/time_converter.dart';
 
 import '../../logic/bloc/app_bloc.dart';
 
@@ -13,9 +15,18 @@ class DailyForecastTab extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.grey.shade400,
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [],
+            child: ListView.builder(
+              itemCount: state.currentForecast!.listOfForecasts!.length,
+              itemBuilder: (context, index) {
+                return DailyForecastListItem(
+                  //передаем прогноз для строки списка
+                  dailyForecast: state.currentForecast!.listOfForecasts![index],
+                  //передаем дату в конвертированном виде
+                  timeClass: TimeConverter.getDate(
+                    state.currentForecast!.listOfForecasts![index].dateTime!,
+                  ),
+                );
+              },
             ),
           ),
         );

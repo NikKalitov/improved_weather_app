@@ -1,7 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../models/current_forecast.dart';
-import '../models/location.dart';
 
 class ApiClient {
   static Future<bool> checkConnectivity() async {

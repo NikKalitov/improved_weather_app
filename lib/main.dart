@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import './interface/pages/tab_page.dart';
-import './interface/pages/test_page.dart';
 
 import './logic/bloc/app_bloc.dart';
 import '../../logic/cubit/request_cubit/request_cubit.dart';
@@ -18,13 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<AppBloc>(
           create: (context) => AppBloc(),
         ),
-        BlocProvider(
+        BlocProvider<RequestCubit>(
           create: (context) => RequestCubit(),
         ),
-        BlocProvider(
+        BlocProvider<CurrentForecastCubit>(
           create: (context) => CurrentForecastCubit(),
         ),
       ],
