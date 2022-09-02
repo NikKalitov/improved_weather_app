@@ -1,9 +1,12 @@
 import './daily_forecast.dart';
+import './hourly_forecast.dart';
 
 class CurrentForecast {
   String? iconID;
-  List<dynamic>? listJson = [];
-  List<DailyForecast>? listOfForecasts = [];
+  List<dynamic>? listJsonDaily = [];
+  List<DailyForecast>? listOfDailyForecasts = [];
+  List<dynamic>? listJsonHourly = [];
+  List<HourlyForecast>? listOfHourlyForecasts = [];
   double? currentTemp;
   double? currentWind;
   int? currentHumidity;
@@ -18,8 +21,10 @@ class CurrentForecast {
     this.feelsLike,
     this.currentPressure,
     this.iconID,
-    this.listJson,
-    this.listOfForecasts,
+    this.listJsonDaily,
+    this.listOfDailyForecasts,
+    this.listJsonHourly,
+    this.listOfHourlyForecasts,
     this.time,
   });
 
@@ -30,10 +35,17 @@ class CurrentForecast {
     currentHumidity = json['current']['humidity'];
     feelsLike = json['current']['feels_like'].toDouble();
     iconID = json['current']['weather'][0]['icon'];
-    listJson = json['daily'];
-    for (int i = 0; i < listJson!.length; i++) {
-      DailyForecast forecast = DailyForecast.fromJsonOnResponse(listJson![i]);
-      listOfForecasts!.add(forecast);
+    listJsonDaily = json['daily'];
+    listJsonHourly = json['hourly'];
+    for (int i = 0; i < listJsonDaily!.length; i++) {
+      DailyForecast forecast =
+          DailyForecast.fromJsonOnResponse(listJsonDaily![i]);
+      listOfDailyForecasts!.add(forecast);
+    }
+    for (int i = 0; i < listJsonHourly!.length; i++) {
+      HourlyForecast forecast =
+          HourlyForecast.fromJsonOnResponse(listJsonHourly![i]);
+      listOfHourlyForecasts!.add(forecast);
     }
     time = json['current']['dt'];
   }

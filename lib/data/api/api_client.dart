@@ -16,7 +16,7 @@ class ApiClient {
       double lat, double lon, String key) async {
     String returnValue = '';
     final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$lon&exclude=alerts,hourly,minutely&appid=$key&units=metric'));
+        'https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$lon&exclude=alerts,minutely&appid=$key&units=metric'));
     final json = response.body;
     if (response.statusCode == 200) {
       returnValue = json;

@@ -16,14 +16,16 @@ class DailyForecastTab extends StatelessWidget {
           backgroundColor: Colors.grey.shade400,
           body: Center(
             child: ListView.builder(
-              itemCount: state.currentForecast!.listOfForecasts!.length,
+              itemCount: state.currentForecast!.listOfDailyForecasts!.length,
               itemBuilder: (context, index) {
                 return DailyForecastListItem(
                   //передаем прогноз для строки списка
-                  dailyForecast: state.currentForecast!.listOfForecasts![index],
+                  dailyForecast:
+                      state.currentForecast!.listOfDailyForecasts![index],
                   //передаем дату в конвертированном виде
                   timeClass: TimeConverter.getDate(
-                    state.currentForecast!.listOfForecasts![index].dateTime!,
+                    state.currentForecast!.listOfDailyForecasts![index]
+                        .dateTime!,
                   ),
                 );
               },

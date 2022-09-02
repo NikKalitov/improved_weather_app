@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/city_selection_button.dart';
 import '../../logic/bloc/app_bloc.dart';
 import '../widgets/refresh_button.dart';
+import './hourly_forecast_tab.dart';
 import './current_forecast_tab.dart';
 import './daily_forecast_tab.dart';
 
@@ -19,7 +20,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 2, vsync: this, initialIndex: 0);
+    _controller = TabController(length: 3, vsync: this, initialIndex: 1);
   }
 
   @override
@@ -28,7 +29,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
       builder: (context, state) {
         context.read<AppBloc>().add(const AppEvent.started());
         return DefaultTabController(
-          length: 2,
+          length: _controller.length,
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.grey.shade400,
@@ -43,6 +44,9 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
                 indicatorColor: Colors.white,
                 tabs: const [
                   Tab(
+                    icon: Icon(Icons.access_time_outlined),
+                  ),
+                  Tab(
                     icon: Icon(Icons.cloud),
                   ),
                   Tab(
@@ -56,6 +60,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
                 ? TabBarView(
                     controller: _controller,
                     children: const [
+                      HourlyForecastTab(),
                       CurrentForecastTab(),
                       DailyForecastTab(),
                     ],
