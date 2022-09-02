@@ -17,10 +17,27 @@ class TabPage extends StatefulWidget {
 class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
   late TabController _controller;
 
+  final List<Tab> listOfTabs = [
+    Tab(
+      icon: Icon(Icons.access_time_outlined),
+    ),
+    Tab(
+      icon: Icon(Icons.cloud),
+    ),
+    Tab(
+      icon: Icon(Icons.list),
+    ),
+  ];
+
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 3, vsync: this, initialIndex: 1);
+    _controller = TabController(
+      length: listOfTabs.length,
+      vsync: this,
+      initialIndex: 1,
+      animationDuration: const Duration(seconds: 1),
+    );
   }
 
   @override
@@ -42,17 +59,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
               bottom: TabBar(
                 controller: _controller,
                 indicatorColor: Colors.white,
-                tabs: const [
-                  Tab(
-                    icon: Icon(Icons.access_time_outlined),
-                  ),
-                  Tab(
-                    icon: Icon(Icons.cloud),
-                  ),
-                  Tab(
-                    icon: Icon(Icons.list),
-                  ),
-                ],
+                tabs: listOfTabs,
               ),
             ),
             body: state.appStatus == AppStatus.loaded
