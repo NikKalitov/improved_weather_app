@@ -36,7 +36,7 @@ class _TabPageState extends State<TabPage> with SingleTickerProviderStateMixin {
       length: listOfTabs.length,
       vsync: this,
       initialIndex: 1,
-      animationDuration: const Duration(seconds: 1),
+      animationDuration: const Duration(milliseconds: 300),
     );
   }
 
